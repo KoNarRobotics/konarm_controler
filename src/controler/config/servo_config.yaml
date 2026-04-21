@@ -1,0 +1,44 @@
+/**:
+  ros__parameters:
+
+    moveit_servo:
+
+      move_group_name: konarm
+      planning_frame: sdrac_base_link
+      ee_frame_name: axis6_1
+      robot_link_command_frame: sdrac_base_link
+
+      command_in_type: speed_units
+
+      cartesian_command_in_topic: /servo_node/delta_twist_cmds
+      joint_command_in_topic: /servo_node/delta_joint_cmds
+
+      # command_out_topic: /konarm_controller/joint_trajectory
+      # command_out_type: trajectory_msgs/JointTrajectory
+
+      command_out_topic: /konarm_velocity_controller/commands
+      command_out_type: std_msgs/Float64MultiArray
+
+      publish_joint_positions: false
+      publish_joint_velocities: true
+
+      linear_scale: 0.01
+      rotational_scale: 0.05
+
+      publish_period: 0.02
+      incoming_command_timeout: 0.15
+
+      check_collisions: false
+
+      linear_command_scale_delay: 0.05 
+      directional_velocity_smoothing_rate: 10.0
+
+      lower_singularity_threshold: 10000.0
+      hard_stop_singularity_threshold: 20000.0
+      joint_limit_margin: 0.05
+
+      joint_topic: /joint_states
+      status_topic: /servo_node/status
+
+      use_gazebo: false
+      use_singularity_avoidance: true

@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: sdrac_description
+    relative_path: urdf/sdrac_ros2_control.xacro
+  srdf:
+    relative_path: config/sdrac.srdf
+  package_settings:
+    author_name: Jakub Konieczko
+    author_email: jakubkonieczko05@gmail.com
+    generated_timestamp: 1771364776

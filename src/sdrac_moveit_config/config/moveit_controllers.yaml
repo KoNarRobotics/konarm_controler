@@ -1,0 +1,22 @@
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+
+moveit_simple_controller_manager:
+
+  controller_names:
+    - konarm_controller
+
+  konarm_controller:
+
+    type: FollowJointTrajectory
+
+    action_ns: follow_joint_trajectory
+
+    default: true
+
+    joints:
+      - Rev1
+      - Rev2
+      - Rev3
+      - Rev4
+      - Rev5
+      - Rev6
