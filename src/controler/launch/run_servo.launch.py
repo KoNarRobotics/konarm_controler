@@ -35,6 +35,26 @@ def generate_launch_description():
         output='screen'
     )
 
+    # load_velocity_controller = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["konarm_velocity_controller", "-c", "/controller_manager", "--inactive"],
+    #     output='screen'
+    # )
+
+    # switch_controllers = TimerAction(
+    #     period=4.0,
+    #     actions=[
+    #         ExecuteProcess(
+    #             cmd=[
+    #                 'ros2', 'control', 'switch_controllers', 
+    #                 '--deactivate', 'konarm_controller', 
+    #                 '--activate', 'konarm_velocity_controller'
+    #             ],
+    #             output='screen'
+    #         )
+    #     ]
+    # )
     
     switch_type = TimerAction(
         period=4.0,

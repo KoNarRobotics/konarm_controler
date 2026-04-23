@@ -25,7 +25,7 @@ konarm_controller:
       - Rev6
 
     command_interfaces:
-      - velocity          #changed from "position" to "velocity" 
+      - position
 
     state_interfaces:
       - position
@@ -46,3 +46,6 @@ konarm_velocity_controller:
       - Rev4
       - Rev5
       - Rev6
+
+    command_interfaces:
+      - velocity
