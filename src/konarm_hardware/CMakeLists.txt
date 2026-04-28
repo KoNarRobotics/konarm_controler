@@ -22,9 +22,6 @@ foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
 
-# Require ros2_control >= 4.0 (Jazzy)
-find_package(controller_manager 4.0.0 REQUIRED)
-
 # ---- Plugin shared library ------------------------------------------------
 add_library(${PROJECT_NAME} SHARED
   src/konarm_hardware.cpp
@@ -41,19 +38,25 @@ ament_target_dependencies(${PROJECT_NAME} PUBLIC
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
 )
 
-# Link against the joint-driver library extracted from konarm_driver.
-# This brings in KonArmJointDriver, KonArmJointDriverBase, and sdrac_shared_types.
 target_link_libraries(${PROJECT_NAME} PUBLIC
   konarm_driver::konarm_joint_driver_lib
 )
 
-# Register plugin description file with pluginlib
 pluginlib_export_plugin_description_file(hardware_interface konarm_hardware.xml)
 
 # ---- Install --------------------------------------------------------------
 install(
   DIRECTORY include/
   DESTINATION include/${PROJECT_NAME}
+)
+
+install(FILES konarm_hardware.xml
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY config/
+  DESTINATION share/${PROJECT_NAME}/config
 )
 
 install(TARGETS ${PROJECT_NAME}

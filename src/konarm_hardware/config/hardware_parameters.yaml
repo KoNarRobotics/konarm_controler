@@ -1,0 +1,2 @@
+can_interface: "can0"   
+can_timeout_s: 2.0 
