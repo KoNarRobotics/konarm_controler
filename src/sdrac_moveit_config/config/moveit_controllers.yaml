@@ -4,6 +4,7 @@ moveit_simple_controller_manager:
 
   controller_names:
     - konarm_controller
+   
 
   konarm_controller:
 
@@ -20,3 +21,21 @@ moveit_simple_controller_manager:
       - Rev4
       - Rev5
       - Rev6
+
+
+
+# moveit_simple_controller_manager:
+#   controller_names:
+#     - konarm_velocity_controller
+
+# konarm_velocity_controller:
+#   type: JointGroupVelocityController
+#   action_ns: ""
+#   default: true
+#   joints:
+#     - Rev1
+#     - Rev2
+#     - Rev3
+#     - Rev4
+#     - Rev5
+#     - Rev6

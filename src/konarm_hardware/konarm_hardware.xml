@@ -1,0 +1,11 @@
+<library path="konarm_hardware">
+  <class name="konarm_hardware/KonArmHardware"
+         type="konarm_hardware::KonArmHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      ros2_control SystemInterface for the SDRAC KonArm 6-DOF robot arm.
+      Communicates with each joint's custom KonArm firmware over SocketCAN (can0).
+      Exposes velocity command and position/velocity/effort state interfaces for Rev1–Rev6.
+    </description>
+  </class>
+</library>

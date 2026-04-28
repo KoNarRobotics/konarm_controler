@@ -7,35 +7,35 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    konarm_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+    # konarm_controller:
+    #   type: joint_trajectory_controller/JointTrajectoryController
 
     konarm_velocity_controller:
       type: velocity_controllers/JointGroupVelocityController
 
-konarm_controller:
-  ros__parameters:
+# konarm_controller:
+#   ros__parameters:
 
-    joints:
-      - Rev1
-      - Rev2
-      - Rev3
-      - Rev4
-      - Rev5
-      - Rev6
+#     joints:
+#       - Rev1
+#       - Rev2
+#       - Rev3
+#       - Rev4
+#       - Rev5
+#       - Rev6
 
-    command_interfaces:
-      - position
+#     command_interfaces:
+#       - position
 
-    state_interfaces:
-      - position
-      - velocity
+#     state_interfaces:
+#       - position
+#       - velocity
 
-    allow_nonzero_velocity_at_trajectory_end: true
+#     allow_nonzero_velocity_at_trajectory_end: true
 
-    state_publish_rate: 50.0
+#     state_publish_rate: 50.0
 
-    action_monitor_rate: 20.0
+#     action_monitor_rate: 20.0
 
 konarm_velocity_controller:
   ros__parameters:
@@ -49,3 +49,10 @@ konarm_velocity_controller:
 
     command_interfaces:
       - velocity
+    joint_limits:
+      Rev1: {has_velocity_limits: true, max_velocity: 0.5}
+      Rev2: {has_velocity_limits: true, max_velocity: 0.5}
+      Rev3: {has_velocity_limits: true, max_velocity: 0.5}
+      Rev4: {has_velocity_limits: true, max_velocity: 0.5}
+      Rev5: {has_velocity_limits: true, max_velocity: 0.5}
+      Rev6: {has_velocity_limits: true, max_velocity: 0.5}

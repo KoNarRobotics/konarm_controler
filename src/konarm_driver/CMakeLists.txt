@@ -37,8 +37,8 @@ set(EXPORT_COMPILE_COMMANDS ON)
 
 
 add_executable(konarm_driver
-src/konarm_driver.cpp
-src/konarm_joint_driver.cpp
+  src/konarm_driver.cpp
+  # konarm_joint_driver.cpp is now compiled into konarm_joint_driver_lib
 )
 
 add_executable(konarm_basic_joystick_driver
@@ -47,6 +47,50 @@ src/konarm_basic_joystick_driver.cpp
 
 add_subdirectory(sdrac_shared_types)
 
+# --------------------------------------------------------------------------
+# konarm_joint_driver_lib — exported shared library consumed by konarm_hardware.
+#
+# sdrac_shared_types is an INTERFACE sub-directory library; its source and
+# headers are compiled directly here so downstream packages get a
+# self-contained target without needing the sub-directory.
+# --------------------------------------------------------------------------
+add_library(konarm_joint_driver_lib SHARED
+  src/konarm_joint_driver.cpp
+  sdrac_shared_types/src/sdrac_shared_types.cpp
+)
+
+target_compile_features(konarm_joint_driver_lib PUBLIC cxx_std_20)
+
+target_include_directories(konarm_joint_driver_lib PUBLIC
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/sdrac_shared_types/src>
+  $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
+)
+
+ament_target_dependencies(konarm_joint_driver_lib PUBLIC
+  rclcpp
+  std_msgs
+  ari_shared_types
+  can_device
+  konarm_driver_msg
+)
+
+install(TARGETS konarm_joint_driver_lib
+  EXPORT export_konarm_joint_driver_lib
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
+
+# Install sdrac_shared_types header alongside konarm_driver headers so it is
+# found at include/konarm_driver/sdrac_shared_types.hpp (INSTALL_INTERFACE path).
+install(
+  FILES sdrac_shared_types/src/sdrac_shared_types.hpp
+  DESTINATION include/${PROJECT_NAME}
+)
+
+ament_export_targets(export_konarm_joint_driver_lib HAS_LIBRARY_TARGET)
+# --------------------------------------------------------------------------
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
 
@@ -63,7 +107,7 @@ ament_target_dependencies(
 target_link_libraries(
   ${PROJECT_NAME} PUBLIC
     ${PARAMETERS_LIB_NAME}
-    sdrac_shared_types
+    konarm_joint_driver_lib  # provides KonArmJointDriver + sdrac_shared_types symbols
 )
 
 target_include_directories(konarm_basic_joystick_driver PUBLIC

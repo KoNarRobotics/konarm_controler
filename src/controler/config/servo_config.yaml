@@ -22,19 +22,19 @@
       publish_joint_positions: false
       publish_joint_velocities: true
 
-      linear_scale: 0.01
-      rotational_scale: 0.05
+      linear_scale: 0.005                       # 0.01 
+      rotational_scale: 0.01               # 0.05
 
       publish_period: 0.02
-      incoming_command_timeout: 0.15
+      incoming_command_timeout: 0.1    # 0.15
 
-      check_collisions: false
+      check_collisions: true   # false  
 
       linear_command_scale_delay: 0.05 
       directional_velocity_smoothing_rate: 10.0
 
-      lower_singularity_threshold: 10000.0
-      hard_stop_singularity_threshold: 20000.0
+      lower_singularity_threshold: 10000.0           # 10000.0
+      hard_stop_singularity_threshold: 20000.0       # 20000.0
       joint_limit_margin: 0.05
 
       joint_topic: /joint_states
